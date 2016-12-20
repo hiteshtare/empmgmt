@@ -1,0 +1,26 @@
+<table class="ui celled padded table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Gender</th>
+      <th>Country</th>
+      <th>Hobbies</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let employee of employees">
+    <tr>
+      <td>
+        <h2 class="ui center aligned header"><a class="" routerLink="/list/{{employee.name}}">{{employee.name}}</a></h2>
+      </td>
+      <td class="single line">
+        {{employee.gender}}
+      </td>
+      <td class="single line">
+        {{employee.country}}
+      </td>
+      <td>
+        Travel
+      </td>
+    </tr>
+  </tbody>
+</table>

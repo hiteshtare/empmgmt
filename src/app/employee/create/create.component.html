@@ -1,0 +1,76 @@
+<div class="ui container">
+  <form [formGroup]="complexForm" (ngSubmit)="createEmp(complexForm.value)" class="ui form">
+    <h3 class="ui block header">
+      Create Employee
+    </h3>
+    <div class="required field">
+      <label for="name">Name</label>
+      <div class="form-group">
+        <input class="form-control" type="text" placeholder="Name" [formControl]="complexForm.controls['name']">
+        <div class="ui red message" *ngIf="complexForm.controls['name'].dirty && complexForm.controls['name'].hasError('required')">
+          You must enter a name.</div>
+      </div>
+      <div class="ui red message" *ngIf="complexForm.controls['name'].dirty && complexForm.controls['name'].hasError('minlength')">
+        Your name must more than 3 chars.</div>
+      <div class="ui red message" *ngIf="complexForm.controls['name'].dirty && complexForm.controls['name'].hasError('maxlength')">
+        Your name must less than 10 chars.</div>
+    </div>
+    <div class="form-group required field" [ngClass]="{'has-error':!complexForm.controls['gender'].valid}">
+      <label for="gender">Gender</label>
+      <div *ngFor="let gender of genders">
+        <div class="field">
+          <div class="ui radio checkbox">
+            <input type="radio" name="gender" [value]="gender.value" [formControl]="complexForm.controls['gender']">
+            <label>{{gender.text}}</label>
+          </div>
+        </div>
+      </div>
+      <div class="ui red message" *ngIf="complexForm.controls['gender'].dirty && complexForm.controls['gender'].invalid">
+        You must select a gender.</div>
+    </div>
+
+    <div class="form-group required field">
+      <label for="country">Country</label>
+      <select class="form-control ui search dropdown" name="country" [formControl]="complexForm.controls['country']">
+          <option *ngFor="let country of countries"  [value]="country.value">{{country.text}}</option>
+	      </select>
+      <div class="ui red message" *ngIf="complexForm.controls['country'].dirty && complexForm.controls['country'].invalid">
+        You must select a country.</div>
+    </div>
+    <div class="form-group required inline field">
+      <label for="hobbies">Hobbies:</label>
+      <div *ngFor="let hobby of employee.hobbies">
+        <div class="field">
+          <div class="ui checkbox">
+            <input type="checkbox" name="hobbies" [checked]="hobby.checked">
+            <!--<input type="checkbox" name="hobbies" [(ngModel)]="hobby.checked">-->
+            <label>{{hobby.text}}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <button class="ui primary button" type="submit" [disabled]="!complexForm.valid">
+  Save
+</button>
+      <button class="ui button" type="button" (click)="clearFields()">
+  Discard
+</button>
+    </div>
+  </form>
+
+  <div class="ui success message" *ngIf="successText">
+    <i class="close icon"></i>
+    <div class="header">
+      {{successText}}
+    </div>
+  </div>
+
+  <div class="ui negative message" *ngIf="errorText">
+    <i class="close icon"></i>
+    <div class="header">
+      {{errorText}}
+    </div>
+  </div>
+</div>

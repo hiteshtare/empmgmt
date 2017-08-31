@@ -1,0 +1,19 @@
+<div class="ui container">
+  <!--ngIf handles employee in an async way-->
+  <div class="ui cards" *ngIf="employee">
+    <div class="card">
+      <div class="content">
+        <div class="header">{{employee .name}}</div>
+        <div class="meta">{{employee.gender}}</div>
+        <div class="description">
+          {{employee.country}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="ui labeled icon button" routerLink="/list">
+   <i class="left arrow icon"></i>
+  <a>Back to List</a>
+</button>
+</div>
